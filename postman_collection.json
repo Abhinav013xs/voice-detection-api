@@ -1,0 +1,201 @@
+{
+  "info": {
+    "name": "AI Voice Detection API",
+    "description": "Collection for testing AI Voice Detection API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "api_key",
+      "value": "hackathon-api-key-2024",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the API is healthy and running"
+      }
+    },
+    {
+      "name": "API Information",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/",
+          "host": ["{{base_url}}"],
+          "path": [""]
+        },
+        "description": "Get API information and available endpoints"
+      }
+    },
+    {
+      "name": "Detect AI Voice",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{api_key}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"language\": \"en\",\n  \"audio_format\": \"mp3\",\n  \"audio_base64\": \"YOUR_BASE64_ENCODED_AUDIO_HERE\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/detect",
+          "host": ["{{base_url}}"],
+          "path": ["detect"]
+        },
+        "description": "Detect if an audio sample is AI-generated or human"
+      }
+    },
+    {
+      "name": "Get Statistics",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{api_key}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/stats",
+          "host": ["{{base_url}}"],
+          "path": ["stats"]
+        },
+        "description": "Get API usage statistics"
+      }
+    },
+    {
+      "name": "Detect - Hindi",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{api_key}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"language\": \"hi\",\n  \"audio_format\": \"mp3\",\n  \"audio_base64\": \"YOUR_BASE64_ENCODED_AUDIO_HERE\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/detect",
+          "host": ["{{base_url}}"],
+          "path": ["detect"]
+        },
+        "description": "Detect AI voice for Hindi language audio"
+      }
+    },
+    {
+      "name": "Detect - Spanish",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{api_key}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"language\": \"es\",\n  \"audio_format\": \"mp3\",\n  \"audio_base64\": \"YOUR_BASE64_ENCODED_AUDIO_HERE\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/detect",
+          "host": ["{{base_url}}"],
+          "path": ["detect"]
+        },
+        "description": "Detect AI voice for Spanish language audio"
+      }
+    },
+    {
+      "name": "Test - Missing API Key (401)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"language\": \"en\",\n  \"audio_format\": \"mp3\",\n  \"audio_base64\": \"test\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/detect",
+          "host": ["{{base_url}}"],
+          "path": ["detect"]
+        },
+        "description": "Test error handling when API key is missing (should return 401)"
+      }
+    },
+    {
+      "name": "Test - Missing Audio Data (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{api_key}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"language\": \"en\",\n  \"audio_format\": \"mp3\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/detect",
+          "host": ["{{base_url}}"],
+          "path": ["detect"]
+        },
+        "description": "Test error handling when audio data is missing (should return 400)"
+      }
+    }
+  ]
+}
